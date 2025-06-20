@@ -30,8 +30,11 @@ function [deviation, frex, real_amp] = ARSurrSpectByPs(data, srate, n_surrogates
         n_surrogates = 1000;
     end
     
-    if nargin < 4
+    if nargin < 4 || isempty(pad)
         pad = [];
+        num_frex = floor(size(data,1)/2);
+    else
+        num_frex = floor(pad/2);
     end
     
     num_ps = size(data,2);
