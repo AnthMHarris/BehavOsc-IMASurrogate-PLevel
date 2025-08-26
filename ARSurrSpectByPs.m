@@ -38,7 +38,6 @@ function [deviation, frex, real_amp] = ARSurrSpectByPs(data, srate, n_surrogates
     end
     
     num_ps = size(data,2);
-    num_frex = floor(size(data,1)/2);
 
     mdl = arima(1, 0, 0);
 
@@ -87,3 +86,4 @@ function [spectrum,frex] = fftSpect(data,samplingRate,pad_to)
     end
 
 end
+
