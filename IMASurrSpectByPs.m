@@ -1,4 +1,4 @@
-% [deviation, frex, real_amp] = ARSurrSpectByPs(data, srate, n_surrogates, pad)
+% [deviation, frex, real_amp] = IMASurrSpectByPs(data, srate, n_surrogates, pad)
 % 
 %   Inputs:
 %       data         = the behavioural timecourses. Time x participants (required)
@@ -24,7 +24,7 @@
 %
 %   The Software and related documentation are provided “AS IS” and without any warranty of any kind.
 %
-function [deviation, frex, real_amp] = ARSurrSpectByPs(data, srate, n_surrogates, pad)
+function [deviation, frex, real_amp] = IMASurrSpectByPs(data, srate, n_surrogates, pad)
     
     if nargin < 3 || isempty(n_surrogates)
         n_surrogates = 1000;
@@ -39,13 +39,13 @@ function [deviation, frex, real_amp] = ARSurrSpectByPs(data, srate, n_surrogates
     
     num_ps = size(data,2);
 
-    mdl = arima(1, 0, 0);
+    mdl = arima('D',1,'MALags',1,'Constant',0);
 
     deviation = nan(num_frex, num_ps);
     real_amp = deviation;
     
     for p = 1:num_ps
-        %fit the AR(1) model
+        %fit the IMA(1) model
         estMdl = estimate(mdl, data(:,p), 'Display', 'off');
     
         %generate new data
